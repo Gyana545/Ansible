@@ -1,0 +1,30 @@
+---
+# tasks file for php
+- name: install php
+  shell:
+    cmd: amazon-linux-extras install php8.2 -y
+
+- name: install pHp MyAdmin
+  get_url:
+    url: https://files.phpmyadmin.net/phpMyAdmin/5.2.1/phpMyAdmin-5.2.1-english.zip
+    dest: /var/www/html
+
+- name: unzip phpMyAdmin
+  shell:
+    chdir: /var/www/html
+    cmd: unzip phpMyAdmin-5.2.1-english.zip
+
+- name: Rename File phpMyAdmin
+  shell:
+    chdir: /var/www/html
+    cmd: mv -f phpMyAdmin-5.2.1-english phpMyAdmin
+
+- name: Remove the zip file
+  shell:
+    chdir: /var/www/html
+    cmd: rm -fr phpMyAdmin-5.2.1-english.zip
+
+- name: restart httpd
+  service:
+    name: httpd
+    state: restarted

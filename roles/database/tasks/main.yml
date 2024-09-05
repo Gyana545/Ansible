@@ -1,0 +1,42 @@
+---
+# tasks file for database
+- name: install mariadb
+  yum:
+    name: mariadb-server
+    state: present
+
+- name: MariaDB service start
+  service:
+    name: mariadb
+    state: started
+    enabled: yes
+
+- name: install pip package maneger
+  yum:
+    name: pip
+    state: present
+
+- pip:
+    name: pymysql
+
+- name: mysql add user and password
+  mysql_user:
+    name: gyana
+    password: 12345
+    priv: '*.*:ALL'
+    state: present
+
+- name: mysql add root user and password
+  mysql_user:
+    name: root
+    password: root
+    host: localhost
+    priv: '*.*:ALL'
+    state: present
+
+- name: Configure MariaDB to listen on all interfaces
+  lineinfile:
+    dest: /etc/my.cnf
+    regexp: '^bind-address'
+    line: 'bind-address = 0.0.0.0'
+    state: present
