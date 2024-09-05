@@ -1,0 +1,6 @@
+[ec2-user]
+13.201.104.183 ansible_user=ec2-user ansible_private_key_file=/etc/ansible/.secret/ansible.pem
+
+
+#[ec2-user]
+#13.201.129.62 ansible_user=ec2-user ansible_private_key_file=/etc/ansible/.secret/manage_node2.pem
