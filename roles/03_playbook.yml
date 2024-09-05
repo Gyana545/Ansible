@@ -2,6 +2,6 @@
 - hosts: ec2-user
   become: true
   roles:
-    - databse
+    - database
     - httpd
     - php
