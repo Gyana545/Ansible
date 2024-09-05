@@ -1,0 +1,5 @@
+---
+#mariadb user pssword
+mariadb_vars:
+  mariadb_user: gyana
+  mariadb_password: root
