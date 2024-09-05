@@ -1,0 +1,25 @@
+pipeline{
+    agent any
+    stages {
+
+        stage('instance configuration'){
+            steps{
+                withCredentials([sshUserPrivateKey(credentialsId: 'dev', usernameVariable: 'USERNAME', keyFileVariable: 'KEYFILE')]) {
+                    script {
+                        
+                        def remote = [:]
+                        remote.name = 'dev'
+                        remote.host = '13.233.155.23'
+                        remote.allowAnyHosts = true
+                        remote.user = USERNAME
+                        remote.identityFile = KEYFILE
+                        // sh "ssh -i $KEYFILE $USERNAME@35.154.28.86"
+                        
+                        sshCommand remote: remote, command: 'sudo ansible-playbook /etc/ansible/roles/03_playbook.yml'
+                    }
+                }
+                
+            }
+        }
+    }
+}
