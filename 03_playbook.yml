@@ -1,7 +1,0 @@
----
-- hosts: ec2-user
-  become: true
-  roles:
-    - database
-    - httpd
-    - php
